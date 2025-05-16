@@ -34,6 +34,6 @@ public class PassageiroRepository {
         PassageiroInDb.setId(passageiro.getId());
         PassageiroInDb.setNome(passageiro.getNome());
         PassageiroInDb.setCpf(passageiro.getCpf());
-        PassageiroInDb.setIdade(passageiro.getIdade());
+        PassageiroInDb.setEmail(passageiro.getEmail());
     }
 }
