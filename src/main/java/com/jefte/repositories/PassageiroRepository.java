@@ -21,7 +21,7 @@ public class PassageiroRepository {
     }
 
     public void append(Passageiro passageiro) {
-        passageiros.add(passageiro);
+        passageiros.add(passageiro.correct());
     }
 
     public void remove(int id) {

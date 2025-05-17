@@ -1,41 +1,21 @@
 package com.jefte.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Passageiro {
     private int id;
     private String nome;
     private String cpf;
     private String email;
 
-    public Passageiro() {
-    }
-
-    public Passageiro(int id, String nome, String cpf, String email) {
-        this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return this.nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return this.cpf;
-    }
-
+   
     public void setCpf(String cpf) {
         if (!isValidCPF(cpf)) {
             throw new IllegalArgumentException("Invalid CPF");
@@ -49,17 +29,16 @@ public class Passageiro {
         return this;
     }
 
-    public String getEmail() {
-        return this.email;
-    }
-
     public void setEmail(String email) {
+        if (!isValidEmail(email)) {
+            throw new IllegalArgumentException("Invalid email");
+        }
         this.email = email;
     }
 
-    private boolean isValidCPF(String cpf) {
+    public boolean isValidCPF(String cpf) {
         if (cpf == null || cpf.length() != 11) {
-            return false;
+            throw new IllegalArgumentException("Invalid CPF");
         }
 
         int[] digits = new int[11];
@@ -98,9 +77,14 @@ public class Passageiro {
         return digits[10] == checkingDigit;
     }
 
-    private boolean isValidEmail(String email) {
+    public boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        return email.matches(emailRegex);
+        if (email.matches(emailRegex)) {
+            return true;
+        } else {
+            throw new IllegalArgumentException("Invalid email");
+        }
+
     }
 
 }
